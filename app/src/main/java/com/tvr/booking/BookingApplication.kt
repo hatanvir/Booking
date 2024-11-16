@@ -9,4 +9,11 @@ import dagger.hilt.android.HiltAndroidApp
  */
 @HiltAndroidApp
 class BookingApplication: Application() {
+    companion object{
+        lateinit var instance: BookingApplication
+    }
+    override fun onCreate() {
+        super.onCreate()
+        instance = this
+    }
 }
