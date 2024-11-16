@@ -2,7 +2,18 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.tvr.booking.features.home.HomeViewModel" />
 
+        <variable
+            name="activity"
+            type="android.app.Activity" />
+
+        <import type="android.view.View" />
+
+    </data>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -12,6 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/dark"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:padding="20dp"
             tools:context=".features.home.HomeFragment">
 
@@ -52,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/rubik_regular"
-                    android:text="New York, NY"
+                    android:text="@string/new_york_ny"
                     android:textColor="@color/grey" />
             </LinearLayout>
 
@@ -102,10 +115,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
+                android:adapter="@{viewmodel.categoryAdapter}"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView"
-                tools:layout_editor_absoluteX="20dp" />
+                tools:listitem="@layout/item_category" />
 
 
             <!--Recommended-->
@@ -117,32 +133,68 @@
                 android:fontFamily="@font/rubik_medium"
                 android:text="@string/recommended"
                 android:textColor="@color/white"
+                android:visibility="@{viewmodel.progressBarVisibility ? View.GONE : View.VISIBLE}"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/recyclerView"
                 app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/seeAllTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="45dp"
                 android:fontFamily="@font/rubik_medium"
                 android:text="@string/see_all"
+                android:visibility="@{viewmodel.progressBarVisibility ? View.GONE : View.VISIBLE}"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="@+id/recyclerView"
                 app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
+                android:adapter="@{viewmodel.propertyAdapter}"
                 android:orientation="horizontal"
+                tools:listitem="@layout/item_property"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintEnd_toEndOf="@+id/textView3"
+                app:layout_constraintEnd_toEndOf="@+id/seeAllTv"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/white"
+                android:indeterminateTintMode="src_atop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2"
+                android:visibility="@{viewmodel.progressBarVisibility ? View.VISIBLE : View.GONE}"
+                tools:visibility="visible"
+                />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/red"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2"
+                tools:text="Error"
+                android:text="@{viewmodel.error}"
+                tools:visibility="visible"
+                android:gravity="center"
+                android:visibility="@{viewmodel.error.length()>0 ? View.VISIBLE : View.GONE}"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
