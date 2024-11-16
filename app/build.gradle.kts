@@ -1,8 +1,11 @@
+import org.bouncycastle.asn1.iana.IANAObjectIdentifiers.experimental
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("com.google.dagger.hilt.android")
     id("kotlin-kapt")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -36,10 +39,13 @@ android {
         jvmTarget = "1.8"
     }
 
+
+
     buildFeatures{
         dataBinding = true
         viewBinding = true
     }
+
 }
 
 dependencies {
@@ -59,16 +65,23 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
 
     //coroutine
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
     //viewmodel
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
-    implementation ("androidx.fragment:fragment-ktx:1.6.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.7")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
+    implementation ("androidx.fragment:fragment-ktx:1.8.5")
 
     //hilt
     implementation("com.google.dagger:hilt-android:2.46.1")
     kapt("com.google.dagger:hilt-compiler:2.46.1")
+    implementation("androidx.activity:activity-ktx:1.9.3")
+
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    implementation("androidx.fragment:fragment-ktx:1.8.5")
+
+
 
 
 }
