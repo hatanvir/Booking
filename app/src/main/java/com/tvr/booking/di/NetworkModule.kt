@@ -23,7 +23,7 @@ class NetworkModule {
         @ApplicationContext context: Context,
         gsonConverterFactory: GsonConverterFactory
     ) = Retrofit.Builder()
-        .baseUrl("")
+        .baseUrl("https://d9c8de84d7e4424dbbb59e258f353159.api.mockbin.io")
         .addConverterFactory(gsonConverterFactory)
         .build()
 
