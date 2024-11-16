@@ -5,6 +5,7 @@
     <color name="dark">#1D2026</color>
     <color name="grey">#787777</color>
     <color name="light_orange">#E6A190</color>
+    <color name="white_orange">#EFD2CA</color>
     <color name="orange">#E6A190</color>
     <color name="red">#FF0000</color>
 </resources>
